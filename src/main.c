@@ -27,11 +27,11 @@ void ft_print_map(t_map *karta)
 
 static	void	ft_free_map(char **map)
 {
-	while (*map)
-	{
-		ft_strdel(map);
-		map++;
-	}
+	char	**point_map;
+
+	point_map = map;
+	while (*point_map)
+		ft_strdel(point_map++);
 	free (map);
 }
 
@@ -91,18 +91,11 @@ static void		ft_line_null(char **current_line)
 static	t_tetris	*new_struct(t_tetris *one_tetrimino)
 {
 	if (!(one_tetrimino = (t_tetris*)malloc(sizeof(t_tetris))))  // выделяем память под структуру
-	{
-		ft_putendl("error");
 		return (NULL);
-	}
 	one_tetrimino->next = NULL;
 	one_tetrimino->previous = NULL;
 	if (!(one_tetrimino->line = (char**)malloc(5 * sizeof(char*)))) // выделяем память под элемент структуры для карты одной тетрамино
-	{
-		ft_putendl("error");
-		free (one_tetrimino);
 		return (NULL);
-	}
 	ft_line_null(one_tetrimino->line);
 	one_tetrimino->id = 1;
 	return(one_tetrimino);
@@ -119,17 +112,11 @@ static	t_tetris	*add_struct(t_tetris *one_tetrimino)
 	current->previous = one_tetrimino;
 	current->next = NULL;
 	if (!(current->line = (char**)malloc(5 * sizeof(char*)))) // выделяем память под следующий элемент структуры для карты одной тетрамино
-	{
-		free (current);
 		return (NULL);
-	}
 	ft_line_null(current->line);
 	current->id = 1 + one_tetrimino->id;
 	if (one_tetrimino->id > 26) //  проверка на 26 фигурок
-	{
-		ft_putendl("error");
 		return (NULL);
-	}
 	return (current);
 }
 
@@ -161,8 +148,7 @@ static	void	freelst(t_tetris *one_tetrimino) // очистка всех элем
 }
 
 int	ft_error(t_tetris *one_tetrimino)
-{
-	ft_putendl("error");	
+{	
 	freelst(one_tetrimino);
 	return (-1);
 }
@@ -244,43 +230,33 @@ static	int		lst_sharp_connecting(t_tetris *one_tetrimino)
 
 static	int	check_line(char *line, int sharp) // проверка линий на валидные символы и подсчет решеток
 {
-    char    *p_line;
     int     characters;
 
     characters = 0;
-    p_line = line;
-    while (*p_line)
-		{
-			if (*p_line != '.' && *p_line != '#')
-				return (-1);
-			if (characters > 4)
-				return (-1);
-			if (*p_line == '#')
-			{
-				sharp++;
-				if (sharp > 4)
-					return (-1);
-			}
-			p_line++;
-			characters++;
-		}
-		if (characters != 4 && (*line != '\0'))
+    while (*line)
+	{
+		if (*line != '.' && *line != '#')
 			return (-1);
+		line++;
+		characters++;
+	}
+	if (characters != 4 && (*line != '\0'))
+		return (-1);
     return(sharp);
 }
 
-static t_tetris *ft_str_nbr_five(char **a, t_tetris *one_tetrimino)
+static t_tetris *ft_str_nbr_five(char **a, t_tetris *one_tetrimino) // проверка кратных линий
 {
-    if (**a == '\0') // если на строке, кратной пяти, есть \n
+    if (**a == '\0')
 	{
 		free(*a);
 		*a = NULL;
-		if (!(one_tetrimino->next = add_struct(one_tetrimino))) // выделяем память под следующую структуру
+		if (!(one_tetrimino->next = add_struct(one_tetrimino)))
 			return (NULL);
 		one_tetrimino = one_tetrimino->next;
 		one_tetrimino->next = NULL;
 	}
-	else if (**a != '\0') // если строка кратная пяти не пустая
+	else if (**a != '\0')
 		return (NULL);
 	return (one_tetrimino);
 }
@@ -321,13 +297,11 @@ int ft_valid(int fd, char *line)
 				return (ft_error(one_tetrimino));
 			a = one_tetrimino->line;
 		}
-		str_nbr++; // счетчик строки
+		str_nbr++;
 		*a = line;
-		if((sharp = check_line(*a, sharp)) == -1) // проверка линий на валидные символы и подсчет решеток
-			return (ft_error(one_tetrimino));
-		if (((**a == '\0') && ((str_nbr % 5) != 0))) // проверка на \n на строке некратной 5
-			return (ft_error(one_tetrimino));
-		if ((str_nbr % 5) == 0) // проверка строки на кратность 5
+		if((sharp = check_line(*a, sharp)) == -1 || (**a == '\0' && (str_nbr % 5) != 0))
+			return (ft_error(one_tetrimino));	
+		if ((str_nbr % 5) == 0)
 		{
 			if(((one_tetrimino->next = ft_str_nbr_five(a, one_tetrimino))) == NULL)
 				return(ft_error(one_tetrimino));
@@ -335,7 +309,7 @@ int ft_valid(int fd, char *line)
 			a = one_tetrimino->line;
 			sharp = 0;
 		}
-		if ((str_nbr % 5) != 0) // переключение элемента массива, если строка не кратна пяти
+		if ((str_nbr % 5) != 0)
 			a++;
 	}
 	if (ft_end_valid(str_nbr, a, one_tetrimino) == -1)
@@ -349,14 +323,9 @@ int		main(int ac, char **av)
 	char        *line;
 
 	line  = NULL;
-	if (ac != 2)
+	if ((fd = open(av[1], O_RDONLY)) == -1 || ac != 2 || (ft_valid(fd, line) == -1))
 	{
 		ft_putendl("error");
-		return (-1);
-	}
-	fd = open(av[1], O_RDONLY);
-	if(ft_valid(fd, line) == -1)
-	{
 		close(fd);
 		return (-1);
 	}

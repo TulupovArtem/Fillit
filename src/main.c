@@ -339,10 +339,12 @@ static	int	check_line(char *line, int sharp) // проверка линий на
 	{
 		if (*line != '.' && *line != '#')
 			return (-1);
+		if (*line == '#')
+			sharp++;
 		line++;
 		characters++;
 	}
-	if (characters != 4 && (*line != '\0'))
+	if (characters != 4)
 		return (-1);
     return(sharp);
 }
@@ -367,7 +369,7 @@ int ft_end_valid(int str_nbr, char **a, t_tetris *one_tetrimino)
 {
     if (str_nbr > 0)
     {
-        if (((str_nbr % 5) == 0) && *a == NULL)
+        if ((str_nbr % 5 == 0) && *a == NULL)
             return (-1);
         else
         {
@@ -382,39 +384,45 @@ int ft_end_valid(int str_nbr, char **a, t_tetris *one_tetrimino)
 	return (0);
 }
 
+static t_tetris *ft_valid_extra(t_tetris *one_tetrimino, t_valid *valid, char *line)
+{
+    if (valid->str_nbr == 0)
+	{
+		if ((one_tetrimino = new_struct(one_tetrimino)) == NULL)
+			return (NULL);
+		valid->a = one_tetrimino->line;
+	}
+	valid->str_nbr++;
+	*valid->a = line;
+	if((valid->sharp = check_line(*valid->a, valid->sharp)) == -1 || (**valid->a == '\0' && (valid->str_nbr % 5) != 0))
+		return (NULL);	
+	if ((valid->str_nbr % 5) == 0)
+	{
+		if(((one_tetrimino->next = ft_str_nbr_five(valid->a, one_tetrimino))) == NULL)
+			return(NULL);
+		one_tetrimino = one_tetrimino->next;
+		valid->a = one_tetrimino->line;
+		valid->sharp = 0;
+	}
+	if ((valid->str_nbr % 5) != 0)
+		valid->a++;
+    return (one_tetrimino);
+}
+
 int ft_valid(int fd, char *line)
 {
     t_tetris    *one_tetrimino = NULL;
-	size_t      str_nbr;
-	int			sharp;
-	char		**a;
+	t_valid		valid;
 
-    str_nbr = 0;
-	sharp = 0;
+	valid.a = NULL;
+    valid.str_nbr = 0;
+	valid.sharp = 0;
     while ((get_next_line(fd, &line)) > 0)
 	{
-		if (str_nbr == 0)
-		{
-			if ((one_tetrimino = new_struct(one_tetrimino)) == NULL)
-				return (ft_error(one_tetrimino));
-			a = one_tetrimino->line;
-		}
-		str_nbr++;
-		*a = line;
-		if((sharp = check_line(*a, sharp)) == -1 || (**a == '\0' && (str_nbr % 5) != 0))
-			return (ft_error(one_tetrimino));	
-		if ((str_nbr % 5) == 0)
-		{
-			if(((one_tetrimino->next = ft_str_nbr_five(a, one_tetrimino))) == NULL)
-				return(ft_error(one_tetrimino));
-			one_tetrimino = one_tetrimino->next;
-			a = one_tetrimino->line;
-			sharp = 0;
-		}
-		if ((str_nbr % 5) != 0)
-			a++;
+		if(!(one_tetrimino = ft_valid_extra(one_tetrimino, &valid, line)))
+			return (ft_error(one_tetrimino));
 	}
-	if (ft_end_valid(str_nbr, a, one_tetrimino) == -1)
+	if (ft_end_valid(valid.str_nbr, valid.a, one_tetrimino) == -1)
 		return (ft_error(one_tetrimino));
 	return (0);
 }
@@ -425,7 +433,7 @@ int		main(int ac, char **av)
 	char        *line;
 
 	line  = NULL;
-	if ((fd = open(av[1], O_RDONLY)) == -1 || ac != 2 || (ft_valid(fd, line) == -1))
+	if ((fd = open(av[1], O_RDONLY)) == -1 || ac != 2 || ft_valid(fd, line) == -1)
 	{
 		ft_putendl("error");
 		close(fd);

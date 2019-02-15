@@ -3,17 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/14 19:08:47 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/13 17:10:01 by idunaver         ###   ########.fr       */
+/*   Created: 2019/02/11 14:09:00 by yperra-f          #+#    #+#             */
+/*   Updated: 2019/02/15 13:26:41 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
-# include "../libft/includes/libft.h"
-# include "../libft/includes/get_next_line.h"
+
+# include <stdio.h>
+# include <libc.h>
+# include "gnl/get_next_line.h"
+
+typedef struct      s_valid
+{
+    char            **a;
+    int             str_nbr;
+    int             sharp;
+}                   t_valid;
+
+typedef struct      s_coord
+{
+    int             i_start;
+    int             i_end;
+    int             j_start;
+    int             j_end;
+}                   t_coord;
 
 typedef struct      s_map
 {
@@ -28,7 +45,5 @@ typedef struct      s_tetris
     struct s_tetris *next;
     struct s_tetris *previous;
 }                   t_tetris;
-
-int	main(int ac, char **av);
 
 #endif

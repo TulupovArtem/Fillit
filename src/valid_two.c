@@ -6,7 +6,7 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:30:23 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/18 16:28:17 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:22:05 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_up_down(t_sharp *sharp)
 {
-	if (sharp->x != 0) //проверка сверху
+	if (sharp->x != 0)
 	{
 		sharp->x--;
 		if (sharp->p_line[sharp->x][sharp->y] == '#')
 			sharp->i++;
 		sharp->x++;
 	}
-	if (sharp->x != 3) //проверка снизу
+	if (sharp->x != 3)
 	{
 		sharp->x++;
 		if (sharp->p_line[sharp->x][sharp->y] == '#')
@@ -32,14 +32,14 @@ void	ft_up_down(t_sharp *sharp)
 
 void	ft_left_right(t_sharp *sharp)
 {
-	if (sharp->y != 4) //проверка справа
+	if (sharp->y != 4)
 	{
 		sharp->y++;
 		if (sharp->p_line[sharp->x][sharp->y] == '#')
 			sharp->i++;
 		sharp->y--;
 	}
-	if (sharp->y != 0) //проверка слева
+	if (sharp->y != 0)
 	{
 		sharp->y--;
 		if (sharp->p_line[sharp->x][sharp->y] == '#')
@@ -65,7 +65,7 @@ int		ft_check_connect(t_sharp *sharp)
 		sharp->x++;
 	}
 	sharp->x = 0;
-	return(sharp->i);
+	return (sharp->i);
 }
 
 int		lst_sharp_connecting(t_tetris *one_tetrimino)

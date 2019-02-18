@@ -6,15 +6,15 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:32:05 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/18 16:20:49 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:13:43 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-int ft_count_map_extra(t_tetris *one_tetrimino)
+int		ft_count_map_extra(t_tetris *one_tetrimino)
 {
-	t_coord 		coord;
+	t_coord			coord;
 	t_count_extra	count;
 
 	count.height2 = 0;
@@ -40,9 +40,9 @@ int ft_count_map_extra(t_tetris *one_tetrimino)
 	return (ft_help_count(&count));
 }
 
-int ft_count_map(t_tetris *one_tetrimino)
+int		ft_count_map(t_tetris *one_tetrimino)
 {
-	int x;
+	int	x;
 	int sharp;
 
 	sharp = 4;
@@ -53,22 +53,9 @@ int ft_count_map(t_tetris *one_tetrimino)
 			x++;
 	}
 	else
-		x  = ft_count_map_extra(one_tetrimino);
+		x = ft_count_map_extra(one_tetrimino);
 	return (x);
 }
-
-// void ft_print_map(t_map *karta)
-// {
-// 	char **temp;
-
-// 	temp = karta->map;
-// 	while (*temp)
-// 	{
-// 		write(1, *temp, karta->weight);
-// 		ft_putchar('\n');
-// 		temp++;
-// 	}
-// }
 
 void	ft_free_map(char **map)
 {
@@ -77,10 +64,10 @@ void	ft_free_map(char **map)
 	point_map = map;
 	while (*point_map)
 		ft_strdel(point_map++);
-	free (map);
+	free(map);
 }
 
-int	ft_create_map(t_map *karta, int x)
+int		ft_create_map(t_map *karta, int x)
 {
 	char	**line;
 	int		str;
@@ -103,6 +90,5 @@ int	ft_create_map(t_map *karta, int x)
 		ft_memset(*line, '.', x);
 		line++;
 	}
-	// ft_print_map(karta);
 	return (1);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_two.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:50:44 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/18 13:51:16 by idunaver         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:14:12 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-int ft_help_count(t_count_extra *count)
+int		ft_help_count(t_count_extra *count)
 {
 	int x;
 	int y;
@@ -26,6 +26,6 @@ int ft_help_count(t_count_extra *count)
 	else
 		y = count->width2;
 	if (x >= y)
-		return(x);
+		return (x);
 	return (y);
 }

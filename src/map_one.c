@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map_one.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:32:05 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/18 13:46:25 by idunaver         ###   ########.fr       */
+/*   Updated: 2019/02/18 16:20:49 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ int ft_count_map(t_tetris *one_tetrimino)
 	return (x);
 }
 
-void ft_print_map(t_map *karta)
-{
-	char **temp;
+// void ft_print_map(t_map *karta)
+// {
+// 	char **temp;
 
-	temp = karta->map;
-	while (*temp)
-	{
-		write(1, *temp, karta->weight);
-		ft_putchar('\n');
-		temp++;
-	}
-}
+// 	temp = karta->map;
+// 	while (*temp)
+// 	{
+// 		write(1, *temp, karta->weight);
+// 		ft_putchar('\n');
+// 		temp++;
+// 	}
+// }
 
 void	ft_free_map(char **map)
 {
@@ -103,6 +103,6 @@ int	ft_create_map(t_map *karta, int x)
 		ft_memset(*line, '.', x);
 		line++;
 	}
-	ft_print_map(karta);
+	// ft_print_map(karta);
 	return (1);
 }

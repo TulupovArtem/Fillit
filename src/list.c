@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:25:37 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/18 13:28:54 by idunaver         ###   ########.fr       */
+/*   Updated: 2019/02/18 16:11:19 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-static void		ft_line_null(char **current_line)
+void		ft_line_null(char **current_line)
 {
 	char		**line;
 	int			count_line;

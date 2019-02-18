@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:09:00 by yperra-f          #+#    #+#             */
-/*   Updated: 2019/02/18 13:59:20 by idunaver         ###   ########.fr       */
+/*   Updated: 2019/02/18 16:11:34 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 # include <libc.h>
 # include "../libft/includes/libft.h"
 # include "../libft/includes/get_next_line.h"
+
+typedef struct		s_sharp
+{
+	int				x;
+	int				y;
+	int				i;
+	char			**p_line;
+}					t_sharp;
 
 typedef struct      s_count_extra
 {
@@ -59,17 +67,21 @@ typedef struct      s_tetris
 
 //// main.c ////
 int		    main(int ac, char **av);
-int         ft_error(t_tetris *one_tetrimino);
+t_tetris    *ft_error(t_tetris *one_tetrimino);
+int			ft_error_close(int fd);
 //// valid_one.c ////
-int			ft_valid(int fd, char *line);
+t_tetris	*ft_valid(int fd, char *line, t_tetris *one_tetrimino);
 int			check_line(char *line, int sharp);
 t_tetris	*ft_str_nbr_five(char **a, t_tetris *one_tetrimino);
 t_tetris	*ft_valid_extra(t_tetris *one_tetrimino, t_valid *valid, char *line);
 int			ft_end_valid(int str_nbr, char **a, t_tetris *one_tetrimino);
 //// valid_two.c ////
 int			lst_sharp_connecting(t_tetris *one_tetrimino);
+int			ft_check_connect(t_sharp *sharp);
+void		ft_left_right(t_sharp *sharp);
+void		ft_up_down(t_sharp *sharp);
 //// list.c ////
-int         ft_valid(int fd, char *line);
+void		ft_line_null(char **current_line);
 t_tetris	*add_struct(t_tetris *one_tetrimino);
 t_tetris	*new_struct(t_tetris *one_tetrimino);
 void	    freelst(t_tetris *one_tetrimino);
@@ -82,11 +94,13 @@ int			ft_count_map_extra(t_tetris *one_tetrimino);
 //// map_two.c ////
 int			ft_help_count(t_count_extra *count);
 //// figure.c ////
-int			ft_made_figure(t_tetris *one_tetrimino);
-void		ft_print_figure(char **figure, int id);
+t_tetris	*ft_made_figure(t_tetris *one_tetrimino);
+void		ft_print_figure(char **figure);
 int			ft_create_figure(t_coord *coord, t_tetris *one_tetrimino);
 //// coord.c ////
 void		ft_coord_i(t_coord *coord, t_tetris *one_tetrimino);
 void		ft_coord_j(t_coord *coord, t_tetris *one_tetrimino);
+//// decision.c ////
+int			ft_decision(t_tetris *one_tetrimino);
 
 #endif

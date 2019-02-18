@@ -12,24 +12,31 @@
 
 #include "../includes/fillit.h"
 
-int		ft_error(t_tetris *one_tetrimino)
-{	
-	freelst(one_tetrimino);
+int			ft_error_close(int fd)
+{
+	ft_putendl("error");
+	close(fd);
 	return (-1);
 }
 
-int		main(int ac, char **av)
+t_tetris	*ft_error(t_tetris *one_tetrimino)
+{	
+	freelst(one_tetrimino);
+	return (NULL);
+}
+
+int			main(int ac, char **av)
 {
 	int         fd;
 	char        *line;
+	t_tetris	*one_tetrimino;
 
+	one_tetrimino = NULL;
 	line  = NULL;
-	if ((fd = open(av[1], O_RDONLY)) == -1 || ac != 2 || ft_valid(fd, line) == -1)
-	{
-		ft_putendl("error");
-		close(fd);
-		return (-1);
-	}
+	if ((fd = open(av[1], O_RDONLY)) == -1 || ac != 2 || ((one_tetrimino = ft_valid(fd, line, one_tetrimino)) == NULL))
+		ft_error_close(fd);
+	if ((ft_decision(one_tetrimino)) == -1)
+		ft_error_close(fd);
 	close(fd);
 	return (0);
 }

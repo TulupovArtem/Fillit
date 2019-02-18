@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:20:28 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/18 14:01:46 by idunaver         ###   ########.fr       */
+/*   Updated: 2019/02/18 16:29:04 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_line(char *line, int sharp) // проверка линий на вал
     characters = 0;
     while (*line)
 	{
-		if (*line != '.' && *line != '#')
+		if ((*line != '.' && *line != '#') || sharp > 4)
 			return (-1);
 		if (*line == '#')
 			sharp++;
@@ -57,8 +57,7 @@ t_tetris *ft_valid_extra(t_tetris *one_tetrimino, t_valid *valid, char *line)
 	}
 	*valid->a = line;
 	valid->str_nbr++;
-	if(((valid->sharp = check_line(*valid->a, valid->sharp)) == -1
-	&& valid->str_nbr % 5 != 0) || (**valid->a != '\0' && valid->str_nbr % 5 == 0))
+	if(((valid->sharp = check_line(*valid->a, valid->sharp)) == -1 && valid->str_nbr % 5 != 0) || (**valid->a != '\0' && valid->str_nbr % 5 == 0))
 		return (NULL);
 	if (valid->str_nbr % 5 == 0)
 	{
@@ -92,9 +91,8 @@ int ft_end_valid(int str_nbr, char **a, t_tetris *one_tetrimino)
 	return (0);
 }
 
-int ft_valid(int fd, char *line)
+t_tetris *ft_valid(int fd, char *line, t_tetris *one_tetrimino)
 {
-    t_tetris    *one_tetrimino = NULL;
 	t_valid		valid;
 
 	valid.a = NULL;
@@ -107,5 +105,5 @@ int ft_valid(int fd, char *line)
 	}
 	if (ft_end_valid(valid.str_nbr, valid.a, one_tetrimino) == -1)
 		return (ft_error(one_tetrimino));
-	return (0);
+	return (one_tetrimino);
 }

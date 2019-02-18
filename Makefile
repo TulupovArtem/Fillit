@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+         #
+#    By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/13 20:14:49 by idunaver          #+#    #+#              #
-#    Updated: 2019/02/18 13:56:26 by idunaver         ###   ########.fr        #
+#    Updated: 2019/02/18 15:58:12 by yperra-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
 SRC = src/main.c src/coord.c src/figure.c src/list.c src/map_one.c \
-src/map_two.c src/valid_one.c src/valid_two.c
+src/map_two.c src/valid_one.c src/valid_two.c src/decision.c
 
 INCLUDE = -I ./includes/
 

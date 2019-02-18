@@ -3,26 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   figure.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idunaver <idunaver@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:35:39 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/18 13:40:34 by idunaver         ###   ########.fr       */
+/*   Updated: 2019/02/18 16:21:13 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-void ft_print_figure(char **figure, int id)
-{
-	ft_putnbr(id);
-	ft_putchar('\n');
-	while (*figure)
-	{
-		ft_putendl(*figure);
-		figure++;
-	}
-	id++;
-}
+// void ft_print_figure(char **figure)
+// {
+// 	while (*figure)
+// 	{
+// 		ft_putendl(*figure);
+// 		figure++;
+// 	}
+// 	ft_putchar('\n');
+// }
 
 int	ft_create_figure(t_coord *coord, t_tetris *one_tetrimino)
 {
@@ -36,7 +34,12 @@ int	ft_create_figure(t_coord *coord, t_tetris *one_tetrimino)
 		return (-1);
 	while (coord->i_start <= coord->i_end)
 	{
-		figure_temp[x] = ft_strsub(one_tetrimino->line[coord->i_start], coord->j_start, one_tetrimino->width);
+		if(!(figure_temp[x] = ft_strsub(one_tetrimino->line[coord->i_start],
+		coord->j_start, one_tetrimino->width)))
+		{
+			ft_free_map(figure_temp);
+			return (-1);
+		}
 		coord->i_start++;
 		x++;
 	}
@@ -46,19 +49,23 @@ int	ft_create_figure(t_coord *coord, t_tetris *one_tetrimino)
 	return (0);
 }
 
-int	ft_made_figure(t_tetris *one_tetrimino)
+t_tetris	*ft_made_figure(t_tetris *one_tetrimino)
 {
-	t_coord	coord;
-	int		id;
+	t_coord		coord;
+	t_tetris	*temp;
 
-	id = 1;
-	while (one_tetrimino)
+	temp = one_tetrimino;
+	while (temp)
 	{
-		ft_coord_i(&coord, one_tetrimino);
-		ft_coord_j(&coord, one_tetrimino);
-		ft_create_figure(&coord, one_tetrimino);
-		ft_print_figure(one_tetrimino->line, id++);
-		one_tetrimino = one_tetrimino->previous;
+		ft_coord_i(&coord, temp);
+		ft_coord_j(&coord, temp);
+		if (ft_create_figure(&coord, temp) == -1)
+		{
+			freelst(one_tetrimino);
+			return (NULL);
+		}
+		// ft_print_figure(temp->line);
+		temp = temp->previous;
 	}
-	return (0);
+	return (temp);
 }

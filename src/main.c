@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./fillit.h"
+#include "../includes/fillit.h"
 
 void ft_print_map(t_map *karta)
 {
@@ -74,18 +74,6 @@ static	int	ft_create_map(t_map *karta, int x)
 	return (1);
 }
 
-static	int ft_count_map(int id)
-{
-	int x;
-	int sharp;
-
-	x = 4;
-	sharp = 4;
-	while (x * x < id * sharp)
-		x++;
-	return (x);
-}
-
 static	void	ft_coord_i(t_coord *coord, t_tetris *one_tetrimino)
 {
 	int x;
@@ -139,17 +127,82 @@ static	void	ft_coord_j(t_coord *coord, t_tetris *one_tetrimino)
 	}
 }
 
+static int ft_help_count(t_count_extra *count)
+{
+	int x;
+	int y;
+
+	if (count->height1 >= count->width1)
+		x = count->height1;
+	else
+		x = count->width1;
+	if (count->height1 >= count->width1)
+		y = count->height2;
+	else
+		y = count->width2;
+	if (x >= y)
+		return(x);
+	return (y);
+}
+
+static int ft_count_map_extra(t_tetris *one_tetrimino)
+{
+	t_coord 		coord;
+	t_count_extra	count;
+
+	count.height2 = 0;
+	count.width2 = 0;
+	while (one_tetrimino)
+	{
+		if (!one_tetrimino->next)
+		{
+			ft_coord_i(&coord, one_tetrimino);
+			count.height1 = coord.i_end - coord.i_start + 1;
+			ft_coord_j(&coord, one_tetrimino);
+			count.width1 = coord.j_end - coord.j_start + 1;
+		}
+		if (one_tetrimino->next)
+		{
+			ft_coord_i(&coord, one_tetrimino);
+			count.height2 = coord.i_end - coord.i_start + 1;
+			ft_coord_j(&coord, one_tetrimino);
+			count.width2 = coord.j_end - coord.j_start + 1;
+		}
+		one_tetrimino = one_tetrimino->previous;
+	}
+	return (ft_help_count(&count));
+}
+
+static	int ft_count_map(t_tetris *one_tetrimino)
+{
+	int x;
+	int sharp;
+
+	sharp = 4;
+	if (one_tetrimino->id > 2)
+	{
+		x = 4;
+		while (x * x < one_tetrimino->id * sharp)
+			x++;
+	}
+	else
+		x  = ft_count_map_extra(one_tetrimino);
+	return (x);
+}
+
 static	int	ft_create_figure(t_coord *coord, t_tetris *one_tetrimino)
 {
 	char **figure_temp;
 	int x;
 
+	one_tetrimino->width = coord->j_end - coord->j_start + 1;
+	one_tetrimino->height = coord->i_end - coord->i_start + 1;
 	x = 0;
-	if (!(figure_temp = (char **)malloc((coord->i_end - coord->i_start + 1 + 1) * sizeof(char *))))
+	if (!(figure_temp = (char **)malloc((one_tetrimino->height + 1) * sizeof(char *))))
 		return (-1);
 	while (coord->i_start <= coord->i_end)
 	{
-		figure_temp[x] = ft_strsub(one_tetrimino->line[coord->i_start], coord->j_start, coord->j_end - coord->j_start + 1);
+		figure_temp[x] = ft_strsub(one_tetrimino->line[coord->i_start], coord->j_start, one_tetrimino->width);
 		coord->i_start++;
 		x++;
 	}
@@ -324,7 +377,7 @@ static	int		lst_sharp_connecting(t_tetris *one_tetrimino)
 		}
 	}
 	karta.map = NULL;
-	if ((ft_create_map(&karta, (karta.weight = ft_count_map(one_tetrimino->id)))) == -1)
+	if (ft_create_map(&karta, (karta.weight = ft_count_map(one_tetrimino))) == -1)
 		return (-1);
 	ft_made_figure(one_tetrimino);
 	return (0);
@@ -392,11 +445,11 @@ static t_tetris *ft_valid_extra(t_tetris *one_tetrimino, t_valid *valid, char *l
 			return (NULL);
 		valid->a = one_tetrimino->line;
 	}
-	valid->str_nbr++;
 	*valid->a = line;
-	if((valid->sharp = check_line(*valid->a, valid->sharp)) == -1 || (**valid->a == '\0' && (valid->str_nbr % 5) != 0))
-		return (NULL);	
-	if ((valid->str_nbr % 5) == 0)
+	valid->str_nbr++;
+	if((valid->sharp = check_line(*valid->a, valid->sharp)) == -1 || (**valid->a != '\0' && valid->str_nbr % 5 == 0))
+		return (NULL);
+	if (valid->str_nbr % 5 == 0)
 	{
 		if(((one_tetrimino->next = ft_str_nbr_five(valid->a, one_tetrimino))) == NULL)
 			return(NULL);
@@ -404,7 +457,7 @@ static t_tetris *ft_valid_extra(t_tetris *one_tetrimino, t_valid *valid, char *l
 		valid->a = one_tetrimino->line;
 		valid->sharp = 0;
 	}
-	if ((valid->str_nbr % 5) != 0)
+	if (valid->str_nbr % 5 != 0)
 		valid->a++;
     return (one_tetrimino);
 }

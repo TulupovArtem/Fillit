@@ -6,7 +6,7 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:35:39 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/18 18:09:38 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/19 16:02:37 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_tetris	*ft_made_figure(t_tetris *one_tetrimino)
 			freelst(one_tetrimino);
 			return (NULL);
 		}
+		if (!temp->previous)
+			break ;
 		temp = temp->previous;
 	}
 	return (temp);

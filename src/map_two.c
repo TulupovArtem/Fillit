@@ -6,7 +6,7 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:50:44 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/19 16:05:07 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/19 19:03:36 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_help_count(t_count_extra *count)
 	return (y);
 }
 
-void ft_print_map(t_map *karta)
+void	ft_print_map(t_map *karta)
 {
 	char **temp;
 

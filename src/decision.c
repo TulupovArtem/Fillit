@@ -6,13 +6,13 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 14:57:44 by yperra-f          #+#    #+#             */
-/*   Updated: 2019/02/19 16:29:36 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/19 19:03:19 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-int	ft_set(t_tetris *one_tetrimino, int x, int y, t_map *karta)
+int		ft_set(t_tetris *one_tetrimino, int x, int y, t_map *karta)
 {
 	int i;
 	int j;
@@ -32,7 +32,7 @@ int	ft_set(t_tetris *one_tetrimino, int x, int y, t_map *karta)
 	return (0);
 }
 
-int	ft_check(char **figure, int x, int y, t_map *karta)
+int		ft_check(char **figure, int x, int y, t_map *karta)
 {
 	int i;
 	int j;
@@ -52,7 +52,7 @@ int	ft_check(char **figure, int x, int y, t_map *karta)
 	return (0);
 }
 
-void ft_reset(char **figure, int x, int y, t_map *karta)
+void	ft_reset(char **figure, int x, int y, t_map *karta)
 {
 	int i;
 	int j;
@@ -71,7 +71,7 @@ void ft_reset(char **figure, int x, int y, t_map *karta)
 	}
 }
 
-int	ft_try(t_tetris *one_tetrimino, int x, int y, t_map *karta)
+int		ft_try(t_tetris *one_tetrimino, int x, int y, t_map *karta)
 {
 	int res;
 
@@ -106,7 +106,7 @@ int		ft_decision(t_tetris *one_tetrimino)
 		return (-1);
 	one_tetrimino = ft_made_figure(one_tetrimino);
 	while (ft_try(one_tetrimino, 0, 0, &karta) == 0)
-		ft_create_map(&karta, karta.weight++);
+		ft_create_map(&karta, ++karta.weight);
 	ft_print_map(&karta);
 	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:35:39 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/19 16:02:37 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/21 18:33:26 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
+#include "fillit.h"
 
 int			ft_create_figure(t_coord *coord, t_tetris *one_tetrimino)
 {

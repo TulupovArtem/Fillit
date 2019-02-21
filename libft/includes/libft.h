@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idunaver <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 19:22:33 by idunaver          #+#    #+#             */
-/*   Updated: 2018/12/20 16:57:32 by idunaver         ###   ########.fr       */
+/*   Updated: 2019/02/21 19:20:08 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <errno.h>
+# include <libc.h>
 
 typedef struct		s_list
 {

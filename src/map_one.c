@@ -6,11 +6,11 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:32:05 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/18 18:13:43 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/21 18:33:52 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
+#include "fillit.h"
 
 int		ft_count_map_extra(t_tetris *one_tetrimino)
 {

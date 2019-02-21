@@ -6,11 +6,11 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:25:37 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/21 15:31:12 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/21 18:33:33 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
+#include "fillit.h"
 
 void		ft_line_null(char **current_line)
 {

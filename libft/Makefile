@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idunaver <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 16:13:52 by idunaver          #+#    #+#              #
-#    Updated: 2019/01/14 20:47:25 by idunaver         ###   ########.fr        #
+#    Updated: 2019/02/21 18:59:02 by yperra-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,16 +55,16 @@ FLAG = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 src/%.o: src/%.c
-	gcc $(FLAG) $(INCLUDE) -c $< -o $@ 
+	@gcc $(FLAG) $(INCLUDE) -c $< -o $@ 
 
 clean:
-	/bin/rm -f $(OBJ)
+	@/bin/rm -f $(OBJ)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 
 re: fclean all

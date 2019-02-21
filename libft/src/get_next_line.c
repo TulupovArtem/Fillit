@@ -6,13 +6,11 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 15:59:16 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/18 18:34:07 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/21 18:44:31 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libc.h>
-#include <stdlib.h>
-#include "../includes/get_next_line.h"
+#include "get_next_line.h"
 
 int			ft_get_result(char *konk, char *temp, char **line, char **ostatok)
 {

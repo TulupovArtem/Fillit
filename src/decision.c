@@ -6,11 +6,11 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 14:57:44 by yperra-f          #+#    #+#             */
-/*   Updated: 2019/02/21 15:28:03 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/21 18:27:41 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
+#include "fillit.h"
 
 int		ft_set(t_tetris *one_tetrimino, int x, int y, t_map *karta)
 {

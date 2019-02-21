@@ -6,11 +6,11 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:20:28 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/18 18:21:42 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/21 18:34:03 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
+#include "fillit.h"
 
 int			check_line(char *line, int sharp)
 {

@@ -6,17 +6,14 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:09:00 by yperra-f          #+#    #+#             */
-/*   Updated: 2019/02/21 15:17:53 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/21 19:28:50 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# include <stdio.h>
-# include <libc.h>
-# include "../libft/includes/libft.h"
-# include "../libft/includes/get_next_line.h"
+# include <get_next_line.h>
 
 typedef struct			s_sharp
 {

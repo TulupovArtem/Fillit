@@ -6,7 +6,7 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:50:44 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/19 19:03:36 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/21 13:54:01 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_help_count(t_count_extra *count)
 		x = count->height1;
 	else
 		x = count->width1;
-	if (count->height1 >= count->width1)
+	if (count->height2 >= count->width2)
 		y = count->height2;
 	else
 		y = count->width2;

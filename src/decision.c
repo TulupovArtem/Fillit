@@ -6,7 +6,7 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 14:57:44 by yperra-f          #+#    #+#             */
-/*   Updated: 2019/02/19 19:24:09 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/21 15:28:03 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ int		ft_decision(t_tetris *one_tetrimino)
 		ft_create_map(&karta, ++karta.weight);
 	ft_print_map(&karta);
 	ft_free_map(karta.map);
-	freelst(one_tetrimino);
+	freelst_next(one_tetrimino);
 	return (0);
 }

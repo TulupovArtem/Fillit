@@ -6,7 +6,7 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:09:00 by yperra-f          #+#    #+#             */
-/*   Updated: 2019/02/19 16:06:26 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/21 15:17:53 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ t_tetris *one_tetrimino);
 void					ft_coord_i(t_coord *coord, t_tetris *one_tetrimino);
 void					ft_coord_j(t_coord *coord, t_tetris *one_tetrimino);
 int						ft_decision(t_tetris *one_tetrimino);
+void					freelst_next(t_tetris *one_tetrimino);
 
 #endif

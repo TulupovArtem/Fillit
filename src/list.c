@@ -6,7 +6,7 @@
 /*   By: yperra-f <yperra-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:25:37 by idunaver          #+#    #+#             */
-/*   Updated: 2019/02/19 20:13:18 by yperra-f         ###   ########.fr       */
+/*   Updated: 2019/02/21 15:31:12 by yperra-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,33 @@ void		freelst(t_tetris *one_tetrimino)
 			}
 			free(one_tetrimino->line);
 			current = one_tetrimino->previous;
+			free(one_tetrimino);
+		}
+	}
+}
+
+void		freelst_next(t_tetris *one_tetrimino)
+{
+	char		**line_temp;
+	t_tetris	*current;
+
+	current = one_tetrimino;
+	if (current == NULL)
+		return ;
+	else
+	{
+		while (current != NULL)
+		{
+			line_temp = current->line;
+			one_tetrimino = current;
+			while (*line_temp)
+			{
+				free(*line_temp);
+				*line_temp = NULL;
+				line_temp++;
+			}
+			free(one_tetrimino->line);
+			current = one_tetrimino->next;
 			free(one_tetrimino);
 		}
 	}
